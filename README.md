@@ -1,4 +1,4 @@
-# AgriLink Smart Irrigation System
+# Chaka Smart Irrigation System
 
 Real-time monitoring and control web interface for AgriLink smart irrigation system.
 
