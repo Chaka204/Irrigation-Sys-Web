@@ -56,6 +56,137 @@ let autoMode = true;
 // Initialize
 init();
 
+// ==================== NATURE THEME ENHANCEMENTS ====================
+
+// Add falling leaves animation
+function addNatureEffects() {
+    const container = document.querySelector('.container');
+    
+    // Create falling leaves
+    for (let i = 0; i < 15; i++) {
+        createFallingLeaf();
+    }
+    
+    // Add water ripple effect on water card
+    const waterCard = document.querySelector('.sensor-card.water');
+    if (waterCard) {
+        waterCard.addEventListener('mouseenter', () => {
+            createRippleEffect(waterCard);
+        });
+    }
+    
+    // Add soil particles animation on moisture card
+    const moistureCard = document.querySelector('.sensor-card.moisture');
+    if (moistureCard) {
+        moistureCard.addEventListener('mouseenter', () => {
+            createSoilParticles(moistureCard);
+        });
+    }
+}
+
+function createFallingLeaf() {
+    const leaf = document.createElement('div');
+    leaf.className = 'leaf';
+    leaf.style.left = `${Math.random() * 100}%`;
+    leaf.style.animationDelay = `${Math.random() * 20}s`;
+    leaf.style.opacity = `${0.05 + Math.random() * 0.1}`;
+    leaf.style.transform = `scale(${0.5 + Math.random() * 0.5})`;
+    leaf.style.background = `hsl(${100 + Math.random() * 40}, 60%, 40%)`;
+    
+    document.body.appendChild(leaf);
+    
+    // Remove leaf after animation completes
+    setTimeout(() => {
+        if (leaf.parentNode) {
+            leaf.parentNode.removeChild(leaf);
+        }
+        // Create new leaf
+        setTimeout(createFallingLeaf, Math.random() * 5000);
+    }, 20000);
+}
+
+function createRippleEffect(element) {
+    const ripple = document.createElement('div');
+    ripple.style.position = 'absolute';
+    ripple.style.borderRadius = '50%';
+    ripple.style.background = 'radial-gradient(circle, rgba(33,150,243,0.2) 0%, transparent 70%)';
+    ripple.style.pointerEvents = 'none';
+    ripple.style.width = '100px';
+    ripple.style.height = '100px';
+    ripple.style.left = `${Math.random() * 80 + 10}%`;
+    ripple.style.top = `${Math.random() * 80 + 10}%`;
+    ripple.style.animation = 'ripple 1.5s ease-out forwards';
+    
+    element.appendChild(ripple);
+    
+    setTimeout(() => {
+        if (ripple.parentNode === element) {
+            element.removeChild(ripple);
+        }
+    }, 1500);
+}
+
+function createSoilParticles(element) {
+    for (let i = 0; i < 5; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = '4px';
+        particle.style.height = '4px';
+        particle.style.background = '#8B4513';
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.left = `${Math.random() * 90 + 5}%`;
+        particle.style.top = `${Math.random() * 90 + 5}%`;
+        particle.style.animation = `soilParticle ${0.5 + Math.random()}s ease-out forwards`;
+        
+        element.appendChild(particle);
+        
+        setTimeout(() => {
+            if (particle.parentNode === element) {
+                element.removeChild(particle);
+            }
+        }, 1000);
+    }
+}
+
+// Add CSS for new animations
+function addNatureAnimationsCSS() {
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple {
+            0% { transform: scale(0.1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+        
+        @keyframes soilParticle {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-20px) scale(0); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Initialize nature effects when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    addNatureAnimationsCSS();
+    addNatureEffects();
+    
+    // Add seasonal greeting based on current month
+    const month = new Date().getMonth();
+    const seasonGreetings = [
+        'Spring Growth', 'Summer Harvest', 'Autumn Preparation', 'Winter Planning'
+    ];
+    const season = seasonGreetings[Math.floor(month / 3)];
+    
+    const subtitle = document.querySelector('.subtitle');
+    if (subtitle) {
+        subtitle.innerHTML += ` <span style="color: var(--leaf-green); font-weight: 600;">| ${season}</span>`;
+    }
+});
+
+// Add these helper functions to your existing app.js file
+// Make sure to call init() and other existing functions
+
 function init() {
     setupEventListeners();
     setupFirebaseListeners();

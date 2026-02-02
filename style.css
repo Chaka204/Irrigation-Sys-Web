@@ -1,49 +1,134 @@
-/* Base Styles */
+/* ==================== NATURE-THEME: BASE STYLES ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --earth-brown: #8B4513;
+    --soil-dark: #5D4037;
+    --leaf-green: #2E7D32;
+    --fresh-green: #4CAF50;
+    --water-blue: #2196F3;
+    --sky-blue: #87CEEB;
+    --sun-yellow: #FFD700;
+    --warm-orange: #FF9800;
+    --cloud-white: #F5F5F5;
+    --tree-bark: #795548;
+    --petal-pink: #E91E63;
+    --stem-green: #8BC34A;
+    --gradient-earth: linear-gradient(135deg, #8B4513 0%, #5D4037 100%);
+    --gradient-nature: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+    --gradient-water: linear-gradient(135deg, #2196F3 0%, #87CEEB 100%);
+    --gradient-sun: linear-gradient(135deg, #FFD700 0%, #FF9800 100%);
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
     padding: 20px;
     color: #333;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(139, 69, 19, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(46, 125, 50, 0.05) 0%, transparent 20%);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Nature Background Elements */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234CAF50' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    z-index: -1;
+    opacity: 0.6;
 }
 
 .container {
     max-width: 1400px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+    box-shadow: 
+        0 20px 60px rgba(46, 125, 50, 0.15),
+        0 0 100px rgba(139, 69, 19, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
     overflow: hidden;
-}
-
-/* Header */
-.header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 30px 40px;
-    text-align: center;
+    border: 1px solid rgba(139, 69, 19, 0.1);
     position: relative;
 }
 
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--gradient-nature);
+    border-radius: 25px 25px 0 0;
+}
+
+/* ==================== NATURE-THEME HEADER ==================== */
+.header {
+    background: linear-gradient(135deg, 
+        rgba(139, 69, 19, 0.95) 0%, 
+        rgba(93, 64, 55, 0.95) 50%, 
+        rgba(46, 125, 50, 0.9) 100%),
+        url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z' fill='%234CAF50' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    color: white;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '🌱';
+    position: absolute;
+    font-size: 200px;
+    opacity: 0.1;
+    right: -30px;
+    top: -50px;
+    transform: rotate(15deg);
+}
+
 .header h1 {
-    font-size: 2.8rem;
-    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5rem;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.header h1 i {
+    color: var(--sun-yellow);
+    font-size: 3rem;
+    animation: float 3s ease-in-out infinite;
 }
 
 .subtitle {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     opacity: 0.9;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
 }
 
 .connection-status {
@@ -52,174 +137,353 @@ body {
     right: 40px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px 20px;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 12px 25px;
     border-radius: 50px;
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.connection-status:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
 }
 
 .status-dot {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    background: #ff4757;
+    background: #ff6b6b;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    position: relative;
+}
+
+.status-dot::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 107, 107, 0.3);
     animation: pulse 2s infinite;
 }
 
 .status-dot.connected {
-    background: #2ed573;
+    background: #2ecc71;
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.7);
+}
+
+.status-dot.connected::after {
+    border-color: rgba(46, 204, 113, 0.3);
 }
 
 .status-text {
     font-weight: 600;
+    font-size: 1rem;
 }
 
-/* Dashboard Sections */
+/* ==================== NATURE-THEME DASHBOARD ==================== */
 .dashboard {
     padding: 40px;
+    background: linear-gradient(to bottom, #FFFFFF, #F9F9F9);
 }
 
-section {
-    margin-bottom: 40px;
-}
-
+/* Section Headers with Nature Icons */
 section h2 {
-    font-size: 1.8rem;
-    color: #2c3e50;
-    margin-bottom: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: var(--soil-dark);
+    margin-bottom: 30px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    border-bottom: 3px solid #667eea;
-    padding-bottom: 10px;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid;
+    border-image: linear-gradient(to right, var(--leaf-green), var(--fresh-green)) 1;
+    position: relative;
 }
 
-/* Sensors Grid */
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100px;
+    height: 3px;
+    background: var(--gradient-sun);
+}
+
+/* ==================== SENSOR CARDS - NATURE STYLE ==================== */
 .sensors-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
 }
 
 .sensor-card {
     background: white;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 5px solid;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(139, 69, 19, 0.1);
+    position: relative;
+    overflow: hidden;
 }
+
+.sensor-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+}
+
+.sensor-card.moisture::before { background: var(--gradient-earth); }
+.sensor-card.water::before { background: var(--gradient-water); }
+.sensor-card.temp::before { background: var(--gradient-sun); }
+.sensor-card.humidity::before { background: var(--gradient-nature); }
 
 .sensor-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.sensor-card.moisture { border-left-color: #3498db; }
-.sensor-card.water { border-left-color: #2980b9; }
-.sensor-card.temp { border-left-color: #e74c3c; }
-.sensor-card.humidity { border-left-color: #27ae60; }
+.sensor-card:hover .sensor-icon {
+    transform: scale(1.1) rotate(5deg);
+}
 
 .sensor-icon {
-    font-size: 2.5rem;
-    color: #667eea;
-    margin-bottom: 15px;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    transition: transform 0.4s ease;
+    display: inline-block;
+    padding: 15px;
+    border-radius: 50%;
+    background: rgba(139, 69, 19, 0.1);
 }
 
+.sensor-card.moisture .sensor-icon { color: var(--earth-brown); }
+.sensor-card.water .sensor-icon { color: var(--water-blue); }
+.sensor-card.temp .sensor-icon { color: var(--warm-orange); }
+.sensor-card.humidity .sensor-icon { color: var(--leaf-green); }
+
 .sensor-info h3 {
-    font-size: 1.4rem;
-    color: #2c3e50;
-    margin-bottom: 15px;
+    font-size: 1.6rem;
+    color: var(--soil-dark);
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
 .sensor-value {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 15px;
-    color: #2c3e50;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--soil-dark), var(--earth-brown));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    display: inline-block;
 }
 
+.sensor-card.water .sensor-value {
+    background: linear-gradient(135deg, var(--water-blue), var(--sky-blue));
+    -webkit-background-clip: text;
+}
+
+.sensor-card.temp .sensor-value {
+    background: linear-gradient(135deg, var(--warm-orange), var(--sun-yellow));
+    -webkit-background-clip: text;
+}
+
+.sensor-card.humidity .sensor-value {
+    background: linear-gradient(135deg, var(--leaf-green), var(--fresh-green));
+    -webkit-background-clip: text;
+}
+
+/* Nature-Themed Progress Bars */
 .sensor-bar {
-    height: 12px;
-    background: #ecf0f1;
-    border-radius: 6px;
-    margin-bottom: 15px;
+    height: 15px;
+    background: rgba(139, 69, 19, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
     overflow: hidden;
+    position: relative;
+}
+
+.sensor-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        transparent 100%);
+    animation: shimmer 2s infinite;
 }
 
 .bar-fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    border-radius: 6px;
-    transition: width 1s ease;
+    border-radius: 10px;
+    transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.sensor-card.moisture .bar-fill {
+    background: linear-gradient(90deg, var(--earth-brown), var(--soil-dark));
+}
+
+.sensor-card.water .bar-fill {
+    background: linear-gradient(90deg, var(--water-blue), var(--sky-blue));
+}
+
+.sensor-card.temp .bar-fill {
+    background: linear-gradient(90deg, var(--warm-orange), var(--sun-yellow));
+}
+
+.sensor-card.humidity .bar-fill {
+    background: linear-gradient(90deg, var(--leaf-green), var(--fresh-green));
 }
 
 .sensor-status {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    color: #7f8c8d;
+    color: var(--soil-dark);
+    padding: 8px 16px;
+    background: rgba(139, 69, 19, 0.1);
+    border-radius: 20px;
+    display: inline-block;
+    transition: all 0.3s ease;
 }
 
-/* Control Section */
+.sensor-card:hover .sensor-status {
+    background: rgba(139, 69, 19, 0.2);
+    transform: translateX(5px);
+}
+
+/* ==================== CONTROL SECTION - NATURE THEME ==================== */
 .control-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
 }
 
 .control-card {
     background: white;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(139, 69, 19, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.control-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient-nature);
+}
+
+.control-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
 
 .control-card h3 {
-    font-size: 1.5rem;
-    color: #2c3e50;
-    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: var(--soil-dark);
+    margin-bottom: 25px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
+.control-card h3 i {
+    color: var(--leaf-green);
+    font-size: 2rem;
+}
+
+/* Pump Control - Seedling Theme */
 .pump-status {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(139, 69, 19, 0.05);
+    border-radius: 15px;
+    border: 2px dashed rgba(139, 69, 19, 0.2);
 }
 
 .status-indicator {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 20px;
     margin-bottom: 25px;
 }
 
 .led {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: #e74c3c;
-    box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+    box-shadow: 
+        0 0 20px rgba(231, 76, 60, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    position: relative;
     transition: all 0.3s ease;
 }
 
 .led.on {
     background: #2ecc71;
-    box-shadow: 0 0 20px rgba(46, 204, 113, 0.7);
-    animation: pulse 1.5s infinite;
+    box-shadow: 
+        0 0 30px rgba(46, 204, 113, 0.7),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    animation: pumpPulse 1.5s infinite;
 }
 
+#pumpStatusText {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--soil-dark);
+}
+
+/* Mode Control - Garden Theme */
 .mode-control {
     margin-bottom: 25px;
 }
 
 .mode-option {
     margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.mode-option:hover {
+    transform: translateX(10px);
 }
 
 .mode-option input[type="radio"] {
@@ -229,42 +493,58 @@ section h2 {
 .mode-option label {
     display: flex;
     align-items: flex-start;
-    gap: 15px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 10px;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(139, 69, 19, 0.05);
+    border-radius: 15px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
 .mode-option label:hover {
-    background: #e9ecef;
+    background: rgba(139, 69, 19, 0.1);
+    border-color: rgba(139, 69, 19, 0.2);
 }
 
 .mode-option input[type="radio"]:checked + label {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.1), rgba(76, 175, 80, 0.1));
+    border-color: var(--leaf-green);
+    transform: scale(1.02);
 }
 
 .mode-option label i {
-    font-size: 1.5rem;
-    margin-top: 3px;
+    font-size: 2rem;
+    color: var(--leaf-green);
+    margin-top: 5px;
+}
+
+.mode-option input[type="radio"]:checked + label i {
+    color: var(--fresh-green);
+    animation: bounce 0.5s ease;
 }
 
 .mode-option label span {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 600;
+    color: var(--soil-dark);
 }
 
 .mode-description {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    color: var(--soil-dark);
     opacity: 0.8;
     margin-top: 5px;
 }
 
-/* Alarm Card */
-.alarm {
+/* Alarm Card - Weather Alert Theme */
+.control-card.alarm {
     border: 3px solid #ff6b6b;
+    background: linear-gradient(135deg, #ffffff, #fff5f5);
+}
+
+.control-card.alarm::before {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
 }
 
 .alarm-status {
@@ -273,19 +553,26 @@ section h2 {
     gap: 20px;
     margin-bottom: 20px;
     padding: 20px;
-    background: #fff5f5;
-    border-radius: 10px;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 107, 107, 0.2);
 }
 
 .alarm-icon {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #2ecc71;
+    animation: gentleSway 3s ease-in-out infinite;
 }
 
 .alarm-info h4 {
-    font-size: 1.3rem;
-    color: #2c3e50;
+    font-size: 1.5rem;
+    color: var(--soil-dark);
     margin-bottom: 5px;
+}
+
+.alarm-info p {
+    color: #666;
+    font-size: 1rem;
 }
 
 .alarm-details {
@@ -293,81 +580,127 @@ section h2 {
     padding: 15px;
     background: #fff8e1;
     border-radius: 10px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #e67e22;
+    border-left: 4px solid #ffd166;
 }
 
-/* Buttons */
+/* ==================== NATURE-THEME BUTTONS ==================== */
 .btn {
-    padding: 15px 30px;
+    padding: 18px 35px;
     border: none;
     border-radius: 50px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: var(--gradient-nature);
     color: white;
+    box-shadow: 0 8px 25px rgba(46, 125, 50, 0.3);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(46, 125, 50, 0.4);
 }
 
 .btn-secondary {
-    background: #f8f9fa;
-    color: #495057;
-    border: 2px solid #dee2e6;
+    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+    color: var(--soil-dark);
+    border: 2px solid rgba(139, 69, 19, 0.2);
 }
 
 .btn-secondary:hover {
-    background: #e9ecef;
+    background: linear-gradient(135deg, #e0e0e0, #d5d5d5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .btn-alarm {
     background: linear-gradient(135deg, #ff6b6b, #ee5a24);
     color: white;
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
 }
 
 .btn-alarm:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
 }
 
 .help-text {
     font-size: 0.9rem;
-    color: #6c757d;
-    margin-top: 10px;
+    color: #7f8c8d;
+    margin-top: 12px;
     text-align: center;
+    font-style: italic;
 }
 
-/* Info Section */
+/* ==================== INFO SECTION - GARDEN THEME ==================== */
+.info-section {
+    margin-bottom: 40px;
+}
+
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    gap: 25px;
 }
 
 .info-card {
     background: white;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     text-align: center;
+    border: 1px solid rgba(139, 69, 19, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-earth);
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
 
 .info-card h3 {
-    font-size: 1.2rem;
-    color: #2c3e50;
+    font-size: 1.3rem;
+    color: var(--soil-dark);
     margin-bottom: 15px;
     display: flex;
     align-items: center;
@@ -376,112 +709,260 @@ section h2 {
 }
 
 .info-value {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
-    color: #667eea;
+    color: var(--earth-brown);
+    position: relative;
+    display: inline-block;
 }
 
-/* Log Section */
+.info-value::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-nature);
+    transition: width 0.3s ease;
+}
+
+.info-card:hover .info-value::after {
+    width: 100%;
+}
+
+/* ==================== LOG SECTION - GROWTH JOURNAL THEME ==================== */
+.log-section {
+    margin-bottom: 40px;
+}
+
 .log-container {
     background: white;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(139, 69, 19, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.log-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient-earth);
 }
 
 .log-entries {
-    max-height: 200px;
+    max-height: 250px;
     overflow-y: auto;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     padding-right: 10px;
+    border: 2px solid rgba(139, 69, 19, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    background: rgba(139, 69, 19, 0.02);
 }
 
 .log-entry {
-    padding: 10px 15px;
-    margin-bottom: 8px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border-left: 4px solid #667eea;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    background: rgba(139, 69, 19, 0.05);
+    border-radius: 12px;
+    border-left: 4px solid var(--leaf-green);
     font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.log-entry:hover {
+    background: rgba(139, 69, 19, 0.1);
+    transform: translateX(5px);
+}
+
+.log-entry::before {
+    content: '🌱';
+    font-size: 1rem;
 }
 
 .log-time {
-    color: #667eea;
+    color: var(--earth-brown);
     font-weight: 600;
-    margin-right: 15px;
+    min-width: 80px;
 }
 
-/* Footer */
+.log-message {
+    color: var(--soil-dark);
+    flex: 1;
+}
+
+/* ==================== FOOTER - EARTH THEME ==================== */
 .footer {
-    background: #2c3e50;
+    background: linear-gradient(135deg, var(--soil-dark), var(--earth-brown));
     color: white;
-    padding: 25px 40px;
+    padding: 30px 40px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-sun);
+}
+
+.footer p {
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
 }
 
 .footer-note {
-    margin-top: 10px;
-    opacity: 0.7;
+    margin-top: 15px;
+    opacity: 0.8;
     font-size: 0.9rem;
+    font-style: italic;
 }
 
-/* Animations */
+.footer::after {
+    content: '🌿 🌻 💧 ☀️';
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 1.5rem;
+    opacity: 0.2;
+    letter-spacing: 10px;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
 @keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+    0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(46, 204, 113, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+}
+
+@keyframes pumpPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes gentleSway {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(2deg); }
+    75% { transform: rotate(-2deg); }
+}
+
+@keyframes leafFall {
+    0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 1200px) {
+    .sensors-grid,
+    .control-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-    70% {
-        box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
-    }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #667eea;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #764ba2;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
     .container {
-        border-radius: 10px;
-        padding: 10px;
+        border-radius: 15px;
+        margin: 10px;
     }
     
     .header {
-        padding: 20px;
+        padding: 25px 20px;
     }
     
     .header h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
         flex-direction: column;
         gap: 10px;
     }
     
     .connection-status {
         position: static;
-        margin-top: 15px;
+        margin-top: 20px;
         justify-content: center;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .dashboard {
+        padding: 25px 20px;
+    }
+    
+    .sensors-grid,
+    .control-grid,
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .sensor-value {
+        font-size: 2.5rem;
+    }
+    
+    .btn {
+        padding: 16px 25px;
+        font-size: 1rem;
+    }
+    
+    .log-entries {
+        max-height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .sensor-card,
+    .control-card,
+    .info-card {
         padding: 20px;
     }
     
@@ -489,3 +970,52 @@ section h2 {
         font-size: 2rem;
     }
 }
+
+/* ==================== CUSTOM SCROLLBAR ==================== */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(139, 69, 19, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-earth);
+    border-radius: 10px;
+    border: 3px solid white;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--earth-brown), var(--leaf-green));
+}
+
+/* ==================== LOADING ANIMATION ==================== */
+.loading {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(139, 69, 19, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--leaf-green);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==================== SPECIAL EFFECTS ==================== */
+.leaf {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: var(--leaf-green);
+    border-radius: 50% 0;
+    opacity: 0.1;
+    z-index: -1;
+    animation: leafFall 20s linear infinite;
+}
+
+/* Add these elements dynamically with JavaScript */
