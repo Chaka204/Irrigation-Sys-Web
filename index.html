@@ -3,25 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chaka Smart Irrigation System</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>AgriLink - Smart Irrigation System</title>
+    
+    <!-- Nature Theme Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Nature Theme CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Nature-themed favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%234CAF50'/><path d='M30,60 Q50,30 70,60' fill='%232E7D32'/></svg>">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2E7D32">
+    <meta name="description" content="AgriLink - Smart Irrigation System with real-time monitoring and control">
+    
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <!-- Add to existing head section -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
-<!-- Nature-themed favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%234CAF50'/><path d='M30,60 Q50,30 70,60' fill='%232E7D32'/></svg>">
-
-<!-- PWA Manifest for mobile -->
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2E7D32">
-<meta name="description" content="AgriLink - Smart Irrigation System with real-time monitoring and control">
 </head>
 <body>
     <div class="container">
@@ -38,57 +41,58 @@
             <!-- Sensor Readings Section -->
             <section class="sensors-section">
                 <h2><i class="fas fa-thermometer-half"></i> Sensor Readings</h2>
-                <div class="sensors-grid">
-                    <div class="sensor-card moisture">
-                        <div class="sensor-icon">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <div class="sensor-info">
-                            <h3>Soil Moisture</h3>
-                            <div class="sensor-value" id="soilMoisture">-- %</div>
-                            <div class="sensor-bar">
-                                <div class="bar-fill" id="moistureBar"></div>
-                            </div>
-                            <div class="sensor-status" id="moistureStatus">--</div>
-                        </div>
-                    </div>
+                <!-- Replace the entire sensors-grid section with this: -->
+<div class="sensors-grid">
+    <div class="sensor-card moisture">
+        <div class="sensor-icon">
+            <i class="fas fa-seedling"></i>
+        </div>
+        <div class="sensor-info">
+            <h3>Soil Moisture</h3>
+            <div class="sensor-value" id="soilMoisture">-- %</div>
+            <div class="sensor-bar">
+                <div class="bar-fill" id="moistureBar"></div>
+            </div>
+            <div class="sensor-status" id="moistureStatus">--</div>
+        </div>
+    </div>
 
-                    <div class="sensor-card water">
-                        <div class="sensor-icon">
-                            <i class="fas fa-water"></i>
-                        </div>
-                        <div class="sensor-info">
-                            <h3>Water Level</h3>
-                            <div class="sensor-value" id="waterLevel">-- %</div>
-                            <div class="sensor-bar">
-                                <div class="bar-fill" id="waterBar"></div>
-                            </div>
-                            <div class="sensor-status" id="waterStatus">--</div>
-                        </div>
-                    </div>
+    <div class="sensor-card water">
+        <div class="sensor-icon">
+            <i class="fas fa-water"></i>
+        </div>
+        <div class="sensor-info">
+            <h3>Water Level</h3>
+            <div class="sensor-value" id="waterLevel">-- %</div>
+            <div class="sensor-bar">
+                <div class="bar-fill" id="waterBar"></div>
+            </div>
+            <div class="sensor-status" id="waterStatus">--</div>
+        </div>
+    </div>
 
-                    <div class="sensor-card temp">
-                        <div class="sensor-icon">
-                            <i class="fas fa-temperature-high"></i>
-                        </div>
-                        <div class="sensor-info">
-                            <h3>Temperature</h3>
-                            <div class="sensor-value" id="temperature">-- °C</div>
-                            <div class="sensor-status" id="tempStatus">--</div>
-                        </div>
-                    </div>
+    <div class="sensor-card temp">
+        <div class="sensor-icon">
+            <i class="fas fa-temperature-high"></i>
+        </div>
+        <div class="sensor-info">
+            <h3>Temperature</h3>
+            <div class="sensor-value" id="temperature">-- °C</div>
+            <div class="sensor-status" id="tempStatus">--</div>
+        </div>
+    </div>
 
-                    <div class="sensor-card humidity">
-                        <div class="sensor-icon">
-                            <i class="fas fa-humidity"></i>
-                        </div>
-                        <div class="sensor-info">
-                            <h3>Humidity</h3>
-                            <div class="sensor-value" id="humidity">-- %</div>
-                            <div class="sensor-status" id="humidityStatus">--</div>
-                        </div>
-                    </div>
-                </div>
+    <div class="sensor-card humidity">
+        <div class="sensor-icon">
+            <i class="fas fa-humidity"></i>
+        </div>
+        <div class="sensor-info">
+            <h3>Humidity</h3>
+            <div class="sensor-value" id="humidity">-- %</div>
+            <div class="sensor-status" id="humidityStatus">--</div>
+        </div>
+    </div>
+</div>
             </section>
 
             <!-- Control Section -->

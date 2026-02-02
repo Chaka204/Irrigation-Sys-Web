@@ -1,61 +1,3 @@
-// Firebase Configuration
-const firebaseConfig = {
-
-  apiKey: "AIzaSyAqcXo1hvCXhvhltC-BR3IO6Ge86ACHxFo",
-
-  authDomain: "irrigation-system-a2794.firebaseapp.com",
-
-  databaseURL: "https://irrigation-system-a2794-default-rtdb.asia-southeast1.firebasedatabase.app",
-
-  projectId: "irrigation-system-a2794",
-
-  storageBucket: "irrigation-system-a2794.firebasestorage.app",
-
-  messagingSenderId: "1060202550443",
-
-  appId: "1:1060202550443:web:1251f6ad96feadb1fa13ee"
-
-};
-
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
-
-// DOM Elements
-const soilMoistureEl = document.getElementById('soilMoisture');
-const waterLevelEl = document.getElementById('waterLevel');
-const temperatureEl = document.getElementById('temperature');
-const humidityEl = document.getElementById('humidity');
-const pumpLed = document.getElementById('pumpLed');
-const pumpStatusText = document.getElementById('pumpStatusText');
-const togglePumpBtn = document.getElementById('togglePumpBtn');
-const alarmStatus = document.getElementById('alarmStatus');
-const alarmDetails = document.getElementById('alarmDetails');
-const lastUpdateEl = document.getElementById('lastUpdate');
-const connectionInfoEl = document.getElementById('connectionInfo');
-const deviceStatusEl = document.getElementById('deviceStatus');
-const moistureBar = document.getElementById('moistureBar');
-const waterBar = document.getElementById('waterBar');
-const logEntries = document.getElementById('logEntries');
-const clearLogBtn = document.getElementById('clearLogBtn');
-const connectionStatus = document.getElementById('connectionStatus');
-const statusDot = document.querySelector('.status-dot');
-const statusText = document.querySelector('.status-text');
-const autoModeRadio = document.getElementById('autoMode');
-const manualModeRadio = document.getElementById('manualMode');
-const applyModeBtn = document.getElementById('applyModeBtn');
-const testAlarmBtn = document.getElementById('testAlarmBtn');
-
-// State variables
-let isConnected = false;
-let lastUpdateTime = null;
-let pumpState = false;
-let autoMode = true;
-
-// Initialize
-init();
-
 // ==================== NATURE THEME ENHANCEMENTS ====================
 
 // Add falling leaves animation
@@ -162,6 +104,24 @@ function addNatureAnimationsCSS() {
             0% { transform: translateY(0) scale(1); opacity: 1; }
             100% { transform: translateY(-20px) scale(0); opacity: 0; }
         }
+        
+        .leaf {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: #4CAF50;
+            border-radius: 50% 0;
+            opacity: 0.1;
+            z-index: -1;
+            animation: leafFall 20s linear infinite;
+        }
+        
+        @keyframes leafFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.1; }
+            90% { opacity: 0.05; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
     `;
     document.head.appendChild(style);
 }
@@ -174,18 +134,78 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add seasonal greeting based on current month
     const month = new Date().getMonth();
     const seasonGreetings = [
-        'Spring Growth', 'Summer Harvest', 'Autumn Preparation', 'Winter Planning'
+        'Spring Growth 🌱', 'Summer Harvest ☀️', 'Autumn Preparation 🍂', 'Winter Planning ❄️'
     ];
     const season = seasonGreetings[Math.floor(month / 3)];
     
     const subtitle = document.querySelector('.subtitle');
     if (subtitle) {
-        subtitle.innerHTML += ` <span style="color: var(--leaf-green); font-weight: 600;">| ${season}</span>`;
+        subtitle.innerHTML += ` <span style="color: #2E7D32; font-weight: 600; background: rgba(46, 125, 50, 0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem;">${season}</span>`;
     }
 });
 
-// Add these helper functions to your existing app.js file
-// Make sure to call init() and other existing functions
+// ==================== YOUR EXISTING APP.JS CODE STARTS HERE ====================
+// [Your existing Firebase initialization and other code goes below]
+
+// Firebase Configuration
+const firebaseConfig = {
+
+  apiKey: "AIzaSyAqcXo1hvCXhvhltC-BR3IO6Ge86ACHxFo",
+
+  authDomain: "irrigation-system-a2794.firebaseapp.com",
+
+  databaseURL: "https://irrigation-system-a2794-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+  projectId: "irrigation-system-a2794",
+
+  storageBucket: "irrigation-system-a2794.firebasestorage.app",
+
+  messagingSenderId: "1060202550443",
+
+  appId: "1:1060202550443:web:1251f6ad96feadb1fa13ee"
+
+};
+
+
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+// DOM Elements
+const soilMoistureEl = document.getElementById('soilMoisture');
+const waterLevelEl = document.getElementById('waterLevel');
+const temperatureEl = document.getElementById('temperature');
+const humidityEl = document.getElementById('humidity');
+const pumpLed = document.getElementById('pumpLed');
+const pumpStatusText = document.getElementById('pumpStatusText');
+const togglePumpBtn = document.getElementById('togglePumpBtn');
+const alarmStatus = document.getElementById('alarmStatus');
+const alarmDetails = document.getElementById('alarmDetails');
+const lastUpdateEl = document.getElementById('lastUpdate');
+const connectionInfoEl = document.getElementById('connectionInfo');
+const deviceStatusEl = document.getElementById('deviceStatus');
+const moistureBar = document.getElementById('moistureBar');
+const waterBar = document.getElementById('waterBar');
+const logEntries = document.getElementById('logEntries');
+const clearLogBtn = document.getElementById('clearLogBtn');
+const connectionStatus = document.getElementById('connectionStatus');
+const statusDot = document.querySelector('.status-dot');
+const statusText = document.querySelector('.status-text');
+const autoModeRadio = document.getElementById('autoMode');
+const manualModeRadio = document.getElementById('manualMode');
+const applyModeBtn = document.getElementById('applyModeBtn');
+const testAlarmBtn = document.getElementById('testAlarmBtn');
+
+// State variables
+let isConnected = false;
+let lastUpdateTime = null;
+let pumpState = false;
+let autoMode = true;
+
+// Initialize
+init();
+
 
 function init() {
     setupEventListeners();

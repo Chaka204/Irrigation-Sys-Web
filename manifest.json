@@ -1,0 +1,16 @@
+{
+  "name": "AgriLink Smart Irrigation",
+  "short_name": "AgriLink",
+  "description": "Monitor and control your smart irrigation system",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F7FA",
+  "theme_color": "#2E7D32",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%234CAF50'/><path d='M30,60 Q50,30 70,60' fill='%232E7D32'/></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
