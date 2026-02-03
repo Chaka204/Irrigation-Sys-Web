@@ -1,153 +1,5 @@
-// ==================== NATURE THEME ENHANCEMENTS ====================
-
-// Add falling leaves animation
-function addNatureEffects() {
-    const container = document.querySelector('.container');
-    
-    // Create falling leaves
-    for (let i = 0; i < 15; i++) {
-        createFallingLeaf();
-    }
-    
-    // Add water ripple effect on water card
-    const waterCard = document.querySelector('.sensor-card.water');
-    if (waterCard) {
-        waterCard.addEventListener('mouseenter', () => {
-            createRippleEffect(waterCard);
-        });
-    }
-    
-    // Add soil particles animation on moisture card
-    const moistureCard = document.querySelector('.sensor-card.moisture');
-    if (moistureCard) {
-        moistureCard.addEventListener('mouseenter', () => {
-            createSoilParticles(moistureCard);
-        });
-    }
-}
-
-function createFallingLeaf() {
-    const leaf = document.createElement('div');
-    leaf.className = 'leaf';
-    leaf.style.left = `${Math.random() * 100}%`;
-    leaf.style.animationDelay = `${Math.random() * 20}s`;
-    leaf.style.opacity = `${0.05 + Math.random() * 0.1}`;
-    leaf.style.transform = `scale(${0.5 + Math.random() * 0.5})`;
-    leaf.style.background = `hsl(${100 + Math.random() * 40}, 60%, 40%)`;
-    
-    document.body.appendChild(leaf);
-    
-    // Remove leaf after animation completes
-    setTimeout(() => {
-        if (leaf.parentNode) {
-            leaf.parentNode.removeChild(leaf);
-        }
-        // Create new leaf
-        setTimeout(createFallingLeaf, Math.random() * 5000);
-    }, 20000);
-}
-
-function createRippleEffect(element) {
-    const ripple = document.createElement('div');
-    ripple.style.position = 'absolute';
-    ripple.style.borderRadius = '50%';
-    ripple.style.background = 'radial-gradient(circle, rgba(33,150,243,0.2) 0%, transparent 70%)';
-    ripple.style.pointerEvents = 'none';
-    ripple.style.width = '100px';
-    ripple.style.height = '100px';
-    ripple.style.left = `${Math.random() * 80 + 10}%`;
-    ripple.style.top = `${Math.random() * 80 + 10}%`;
-    ripple.style.animation = 'ripple 1.5s ease-out forwards';
-    
-    element.appendChild(ripple);
-    
-    setTimeout(() => {
-        if (ripple.parentNode === element) {
-            element.removeChild(ripple);
-        }
-    }, 1500);
-}
-
-function createSoilParticles(element) {
-    for (let i = 0; i < 5; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'absolute';
-        particle.style.width = '4px';
-        particle.style.height = '4px';
-        particle.style.background = '#8B4513';
-        particle.style.borderRadius = '50%';
-        particle.style.pointerEvents = 'none';
-        particle.style.left = `${Math.random() * 90 + 5}%`;
-        particle.style.top = `${Math.random() * 90 + 5}%`;
-        particle.style.animation = `soilParticle ${0.5 + Math.random()}s ease-out forwards`;
-        
-        element.appendChild(particle);
-        
-        setTimeout(() => {
-            if (particle.parentNode === element) {
-                element.removeChild(particle);
-            }
-        }, 1000);
-    }
-}
-
-// Add CSS for new animations
-function addNatureAnimationsCSS() {
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes ripple {
-            0% { transform: scale(0.1); opacity: 1; }
-            100% { transform: scale(2); opacity: 0; }
-        }
-        
-        @keyframes soilParticle {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-20px) scale(0); opacity: 0; }
-        }
-        
-        .leaf {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: #4CAF50;
-            border-radius: 50% 0;
-            opacity: 0.1;
-            z-index: -1;
-            animation: leafFall 20s linear infinite;
-        }
-        
-        @keyframes leafFall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.1; }
-            90% { opacity: 0.05; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// Initialize nature effects when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    addNatureAnimationsCSS();
-    addNatureEffects();
-    
-    // Add seasonal greeting based on current month
-    const month = new Date().getMonth();
-    const seasonGreetings = [
-        'Spring Growth 🌱', 'Summer Harvest ☀️', 'Autumn Preparation 🍂', 'Winter Planning ❄️'
-    ];
-    const season = seasonGreetings[Math.floor(month / 3)];
-    
-    const subtitle = document.querySelector('.subtitle');
-    if (subtitle) {
-        subtitle.innerHTML += ` <span style="color: #2E7D32; font-weight: 600; background: rgba(46, 125, 50, 0.1); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem;">${season}</span>`;
-    }
-});
-
-// ==================== YOUR EXISTING APP.JS CODE STARTS HERE ====================
-// [Your existing Firebase initialization and other code goes below]
-
-// Firebase Configuration
+// ==================== FIREBASE CONFIGURATION ====================
+// Replace with YOUR actual Firebase config
 const firebaseConfig = {
 
   apiKey: "AIzaSyAqcXo1hvCXhvhltC-BR3IO6Ge86ACHxFo",
@@ -167,76 +19,460 @@ const firebaseConfig = {
 };
 
 
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
+const auth = firebase.auth();
 
-// DOM Elements
-const soilMoistureEl = document.getElementById('soilMoisture');
-const waterLevelEl = document.getElementById('waterLevel');
-const temperatureEl = document.getElementById('temperature');
-const humidityEl = document.getElementById('humidity');
-const pumpLed = document.getElementById('pumpLed');
-const pumpStatusText = document.getElementById('pumpStatusText');
-const togglePumpBtn = document.getElementById('togglePumpBtn');
-const alarmStatus = document.getElementById('alarmStatus');
-const alarmDetails = document.getElementById('alarmDetails');
-const lastUpdateEl = document.getElementById('lastUpdate');
-const connectionInfoEl = document.getElementById('connectionInfo');
-const deviceStatusEl = document.getElementById('deviceStatus');
-const moistureBar = document.getElementById('moistureBar');
-const waterBar = document.getElementById('waterBar');
-const logEntries = document.getElementById('logEntries');
-const clearLogBtn = document.getElementById('clearLogBtn');
-const connectionStatus = document.getElementById('connectionStatus');
-const statusDot = document.querySelector('.status-dot');
-const statusText = document.querySelector('.status-text');
-const autoModeRadio = document.getElementById('autoMode');
-const manualModeRadio = document.getElementById('manualMode');
-const applyModeBtn = document.getElementById('applyModeBtn');
-const testAlarmBtn = document.getElementById('testAlarmBtn');
+// ==================== AUTHENTICATION STATE MANAGEMENT ====================
+let currentUser = null;
+let authCheckDone = false;
 
-// State variables
-let isConnected = false;
-let lastUpdateTime = null;
-let pumpState = false;
-let autoMode = true;
+// Check authentication state
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        // User is signed in
+        currentUser = user;
+        console.log('User signed in:', user.email);
+        
+        // If we're on login page, redirect to dashboard
+        if (window.location.pathname.includes('login.html') || 
+            window.location.pathname.includes('index.html')) {
+            window.location.href = 'dashboard.html';
+        } else {
+            // Load dashboard content
+            loadDashboard();
+        }
+    } else {
+        // User is signed out
+        currentUser = null;
+        
+        // If we're not on login page, redirect to login
+        if (!window.location.pathname.includes('login.html') && 
+            !window.location.pathname.includes('index.html')) {
+            window.location.href = 'index.html';
+        }
+    }
+    authCheckDone = true;
+});
 
-// Initialize
-init();
+// ==================== LOGIN PAGE FUNCTIONS ====================
+function setupLoginPage() {
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const loginBtn = document.getElementById('loginBtn');
+    const googleBtn = document.getElementById('googleBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const registerLink = document.getElementById('registerLink');
+    const forgotPassword = document.getElementById('forgotPassword');
 
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            loginWithEmail(emailInput.value, passwordInput.value);
+        });
+    }
 
-function init() {
-    setupEventListeners();
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            loginWithEmail(emailInput.value, passwordInput.value);
+        });
+    }
+
+    if (googleBtn) {
+        googleBtn.addEventListener('click', loginWithGoogle);
+    }
+
+    if (registerLink) {
+        registerLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showRegisterModal();
+        });
+    }
+
+    if (forgotPassword) {
+        forgotPassword.addEventListener('click', (e) => {
+            e.preventDefault();
+            showForgotPasswordModal();
+        });
+    }
+}
+
+function loginWithEmail(email, password) {
+    const errorMessage = document.getElementById('errorMessage');
+    const loginBtn = document.getElementById('loginBtn');
+    const originalText = loginBtn.innerHTML;
+
+    // Show loading state
+    loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+    loginBtn.disabled = true;
+    errorMessage.style.display = 'none';
+
+    auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            // Signed in successfully
+            console.log('Login successful:', userCredential.user.email);
+            
+            // Store user data in localStorage
+            localStorage.setItem('userEmail', userCredential.user.email);
+            localStorage.setItem('userId', userCredential.user.uid);
+            
+            // Redirect to dashboard
+            window.location.href = 'dashboard.html';
+        })
+        .catch((error) => {
+            // Handle errors
+            console.error('Login error:', error);
+            errorMessage.textContent = getErrorMessage(error.code);
+            errorMessage.style.display = 'block';
+            
+            // Reset button
+            loginBtn.innerHTML = originalText;
+            loginBtn.disabled = false;
+        });
+}
+
+function loginWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const googleBtn = document.getElementById('googleBtn');
+    const originalText = googleBtn.innerHTML;
+
+    googleBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
+    googleBtn.disabled = true;
+
+    auth.signInWithPopup(provider)
+        .then((result) => {
+            // This gives you a Google Access Token
+            const credential = result.credential;
+            const token = credential.accessToken;
+            const user = result.user;
+            
+            console.log('Google login successful:', user.email);
+            
+            // Store user data
+            localStorage.setItem('userEmail', user.email);
+            localStorage.setItem('userId', user.uid);
+            localStorage.setItem('userName', user.displayName);
+            localStorage.setItem('userPhoto', user.photoURL);
+            
+            window.location.href = 'dashboard.html';
+        })
+        .catch((error) => {
+            console.error('Google login error:', error);
+            document.getElementById('errorMessage').textContent = 
+                'Google login failed. Please try again.';
+            document.getElementById('errorMessage').style.display = 'block';
+            
+            googleBtn.innerHTML = originalText;
+            googleBtn.disabled = false;
+        });
+}
+
+function showRegisterModal() {
+    const modalHTML = `
+        <div class="modal-overlay" id="registerModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>Create New Account</h3>
+                    <button class="close-btn" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="regEmail">Email Address</label>
+                            <input type="email" id="regEmail" required 
+                                   placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="regPassword">Password</label>
+                            <input type="password" id="regPassword" required 
+                                   placeholder="Create a password (min. 6 characters)">
+                        </div>
+                        <div class="form-group">
+                            <label for="regConfirmPassword">Confirm Password</label>
+                            <input type="password" id="regConfirmPassword" required 
+                                   placeholder="Confirm your password">
+                        </div>
+                        <div class="form-group">
+                            <label for="regName">Full Name (Optional)</label>
+                            <input type="text" id="regName" 
+                                   placeholder="Enter your full name">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" 
+                                    onclick="closeModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary" 
+                                    id="registerSubmitBtn">Create Account</button>
+                        </div>
+                    </form>
+                    <div id="registerErrorMessage" class="error-message"></div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    document.getElementById('registerForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        registerNewUser();
+    });
+}
+
+function registerNewUser() {
+    const email = document.getElementById('regEmail').value;
+    const password = document.getElementById('regPassword').value;
+    const confirmPassword = document.getElementById('regConfirmPassword').value;
+    const name = document.getElementById('regName').value;
+    const errorEl = document.getElementById('registerErrorMessage');
+    const submitBtn = document.getElementById('registerSubmitBtn');
+    const originalText = submitBtn.innerHTML;
+
+    // Validation
+    if (password !== confirmPassword) {
+        errorEl.textContent = 'Passwords do not match!';
+        errorEl.style.display = 'block';
+        return;
+    }
+
+    if (password.length < 6) {
+        errorEl.textContent = 'Password must be at least 6 characters long';
+        errorEl.style.display = 'block';
+        return;
+    }
+
+    // Show loading
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+    submitBtn.disabled = true;
+    errorEl.style.display = 'none';
+
+    auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            
+            // Update user profile with name if provided
+            if (name) {
+                return user.updateProfile({
+                    displayName: name
+                }).then(() => {
+                    return user;
+                });
+            }
+            return user;
+        })
+        .then((user) => {
+            console.log('Registration successful:', user.email);
+            
+            // Store user data
+            localStorage.setItem('userEmail', user.email);
+            localStorage.setItem('userId', user.uid);
+            if (name) localStorage.setItem('userName', name);
+            
+            // Close modal and redirect
+            closeModal();
+            window.location.href = 'dashboard.html';
+        })
+        .catch((error) => {
+            console.error('Registration error:', error);
+            errorEl.textContent = getErrorMessage(error.code);
+            errorEl.style.display = 'block';
+            
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+}
+
+function showForgotPasswordModal() {
+    const modalHTML = `
+        <div class="modal-overlay" id="forgotPasswordModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>Reset Password</h3>
+                    <button class="close-btn" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Enter your email address and we'll send you a password reset link.</p>
+                    <form id="forgotPasswordForm">
+                        <div class="form-group">
+                            <label for="resetEmail">Email Address</label>
+                            <input type="email" id="resetEmail" required 
+                                   placeholder="Enter your email">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" 
+                                    onclick="closeModal()">Cancel</button>
+                            <button type="submit" class="btn btn-primary" 
+                                    id="resetSubmitBtn">Send Reset Link</button>
+                        </div>
+                    </form>
+                    <div id="resetErrorMessage" class="error-message"></div>
+                    <div id="resetSuccessMessage" class="success-message"></div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    document.getElementById('forgotPasswordForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        resetPassword();
+    });
+}
+
+function resetPassword() {
+    const email = document.getElementById('resetEmail').value;
+    const errorEl = document.getElementById('resetErrorMessage');
+    const successEl = document.getElementById('resetSuccessMessage');
+    const submitBtn = document.getElementById('resetSubmitBtn');
+    const originalText = submitBtn.innerHTML;
+
+    // Show loading
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+    errorEl.style.display = 'none';
+    successEl.style.display = 'none';
+
+    auth.sendPasswordResetEmail(email)
+        .then(() => {
+            successEl.textContent = 'Password reset email sent! Check your inbox.';
+            successEl.style.display = 'block';
+            
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+            // Close modal after 3 seconds
+            setTimeout(() => {
+                closeModal();
+            }, 3000);
+        })
+        .catch((error) => {
+            console.error('Reset password error:', error);
+            errorEl.textContent = getErrorMessage(error.code);
+            errorEl.style.display = 'block';
+            
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+}
+
+function closeModal() {
+    const modals = document.querySelectorAll('.modal-overlay');
+    modals.forEach(modal => modal.remove());
+}
+
+function getErrorMessage(errorCode) {
+    switch(errorCode) {
+        case 'auth/invalid-email':
+            return 'Invalid email address format.';
+        case 'auth/user-disabled':
+            return 'This account has been disabled.';
+        case 'auth/user-not-found':
+            return 'No account found with this email.';
+        case 'auth/wrong-password':
+            return 'Incorrect password. Please try again.';
+        case 'auth/email-already-in-use':
+            return 'This email is already registered.';
+        case 'auth/weak-password':
+            return 'Password is too weak. Use at least 6 characters.';
+        case 'auth/operation-not-allowed':
+            return 'Email/password accounts are not enabled.';
+        case 'auth/network-request-failed':
+            return 'Network error. Please check your connection.';
+        default:
+            return 'An error occurred. Please try again.';
+    }
+}
+
+// ==================== DASHBOARD FUNCTIONS ====================
+function loadDashboard() {
+    // Show user info
+    displayUserInfo();
+    
+    // Setup Firebase listeners
     setupFirebaseListeners();
-    updateConnectionStatus();
+    
+    // Setup logout button
+    setupLogoutButton();
+    
+    // Setup nature effects
+    addNatureEffects();
 }
 
-function setupEventListeners() {
-    // Pump toggle button
-    togglePumpBtn.addEventListener('click', togglePump);
+function displayUserInfo() {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const userInfoEl = document.getElementById('userInfo');
+    const userNameEl = document.getElementById('userName');
+    const userEmailEl = document.getElementById('userEmail');
+    const userAvatarEl = document.getElementById('userAvatar');
+
+    if (userNameEl) {
+        userNameEl.textContent = user.displayName || user.email.split('@')[0];
+    }
     
-    // Mode apply button
-    applyModeBtn.addEventListener('click', applyMode);
+    if (userEmailEl) {
+        userEmailEl.textContent = user.email;
+    }
     
-    // Test alarm button
-    testAlarmBtn.addEventListener('click', testAlarm);
-    
-    // Clear log button
-    clearLogBtn.addEventListener('click', clearLog);
-    
-    // Update mode radios based on Firebase
-    autoModeRadio.addEventListener('change', () => {
-        if (autoModeRadio.checked) updateModeInFirebase(true);
-    });
-    
-    manualModeRadio.addEventListener('change', () => {
-        if (manualModeRadio.checked) updateModeInFirebase(false);
-    });
+    if (userAvatarEl) {
+        if (user.photoURL) {
+            userAvatarEl.src = user.photoURL;
+            userAvatarEl.style.display = 'block';
+        } else {
+            // Show initials
+            const initials = (user.displayName || user.email)
+                .split(' ')
+                .map(n => n[0])
+                .join('')
+                .toUpperCase()
+                .substring(0, 2);
+            
+            userAvatarEl.style.display = 'none';
+            if (userInfoEl) {
+                const initialsEl = document.createElement('div');
+                initialsEl.className = 'user-initials';
+                initialsEl.textContent = initials;
+                initialsEl.style.background = getRandomColor();
+                userInfoEl.appendChild(initialsEl);
+            }
+        }
+    }
 }
 
+function getRandomColor() {
+    const colors = [
+        '#8B4513', '#228B22', '#1E90FF', '#FF8C00',
+        '#654321', '#32CD32', '#87CEEB', '#FFD700'
+    ];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function setupLogoutButton() {
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            auth.signOut()
+                .then(() => {
+                    console.log('User signed out');
+                    localStorage.clear();
+                    window.location.href = 'index.html';
+                })
+                .catch((error) => {
+                    console.error('Logout error:', error);
+                });
+        });
+    }
+}
+
+// ==================== FIREBASE DATA LISTENERS ====================
 function setupFirebaseListeners() {
+    // Only setup if user is authenticated
+    if (!currentUser) return;
+
     // Listen for sensor data changes
     database.ref('/sensors').on('value', (snapshot) => {
         const data = snapshot.val();
@@ -262,13 +498,91 @@ function setupFirebaseListeners() {
         }
     });
     
-    // Monitor connection state
-    database.ref('.info/connected').on('value', (snapshot) => {
-        isConnected = snapshot.val() === true;
-        updateConnectionStatus();
+    // Listen for user-specific data
+    database.ref(`/users/${currentUser.uid}/settings`).on('value', (snapshot) => {
+        const settings = snapshot.val();
+        if (settings) {
+            updateUserSettings(settings);
+        }
     });
 }
 
+function updateUserSettings(settings) {
+    // Update UI based on user preferences
+    if (settings.theme) {
+        document.body.setAttribute('data-theme', settings.theme);
+    }
+    if (settings.notifications !== undefined) {
+        // Handle notification settings
+    }
+}
+
+// ==================== NATURE EFFECTS (From Previous Code) ====================
+function addNatureEffects() {
+    // Create raindrops
+    for (let i = 0; i < 20; i++) {
+        createRaindrop();
+    }
+    
+    // Create sun
+    createSun();
+    
+    // Add water effect to water card
+    const waterCard = document.querySelector('.sensor-card.water');
+    if (waterCard) {
+        waterCard.addEventListener('mouseenter', createWaterRipple);
+    }
+}
+
+function createRaindrop() {
+    const raindrop = document.createElement('div');
+    raindrop.className = 'raindrop';
+    raindrop.style.left = `${Math.random() * 100}%`;
+    raindrop.style.animationDuration = `${1 + Math.random() * 2}s`;
+    raindrop.style.animationDelay = `${Math.random() * 5}s`;
+    raindrop.style.opacity = `${0.1 + Math.random() * 0.3}`;
+    
+    document.body.appendChild(raindrop);
+    
+    setTimeout(() => {
+        if (raindrop.parentNode) {
+            raindrop.parentNode.removeChild(raindrop);
+        }
+        setTimeout(createRaindrop, Math.random() * 3000);
+    }, 3000);
+}
+
+function createSun() {
+    const sunContainer = document.createElement('div');
+    sunContainer.className = 'sun-container';
+    const sun = document.createElement('div');
+    sun.className = 'sun';
+    sunContainer.appendChild(sun);
+    document.body.appendChild(sunContainer);
+}
+
+function createWaterRipple() {
+    const ripples = ['💧', '🌊', '💦'];
+    const ripple = document.createElement('span');
+    ripple.textContent = ripples[Math.floor(Math.random() * ripples.length)];
+    ripple.style.position = 'absolute';
+    ripple.style.fontSize = '2rem';
+    ripple.style.opacity = '0.5';
+    ripple.style.animation = 'waterDrop 1.5s ease-out forwards';
+    ripple.style.zIndex = '1';
+    ripple.style.left = `${Math.random() * 80 + 10}%`;
+    ripple.style.top = `${Math.random() * 80 + 10}%`;
+    
+    this.appendChild(ripple);
+    
+    setTimeout(() => {
+        if (ripple.parentNode === this) {
+            this.removeChild(ripple);
+        }
+    }, 1500);
+}
+
+// ==================== DASHBOARD DISPLAY FUNCTIONS ====================
 function updateSensorDisplay(data) {
     if (data.soilMoisture !== undefined) {
         soilMoistureEl.textContent = `${data.soilMoisture.toFixed(1)} %`;
@@ -300,213 +614,16 @@ function updateSensorDisplay(data) {
     deviceStatusEl.style.color = '#2ecc71';
 }
 
-function updateBars(data) {
-    if (data.soilMoisture !== undefined) {
-        moistureBar.style.width = `${data.soilMoisture}%`;
+// ... [Keep all your existing dashboard functions from previous code]
+
+// ==================== INITIALIZATION ====================
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if we're on login page or dashboard
+    if (window.location.pathname.includes('login.html') || 
+        window.location.pathname.includes('index.html')) {
+        setupLoginPage();
     }
     
-    if (data.waterLevel !== undefined) {
-        waterBar.style.width = `${data.waterLevel}%`;
-    }
-}
-
-function updateSystemDisplay(data) {
-    // Update pump status
-    if (data.pumpStatus !== undefined) {
-        pumpState = data.pumpStatus;
-        pumpLed.className = pumpState ? 'led on' : 'led';
-        pumpStatusText.textContent = `PUMP: ${pumpState ? 'ON' : 'OFF'}`;
-        togglePumpBtn.innerHTML = pumpState ? 
-            '<i class="fas fa-power-off"></i> TURN PUMP OFF' : 
-            '<i class="fas fa-power-off"></i> TURN PUMP ON';
-    }
-    
-    // Update auto mode
-    if (data.autoMode !== undefined) {
-        autoMode = data.autoMode;
-        autoModeRadio.checked = autoMode;
-        manualModeRadio.checked = !autoMode;
-        applyModeBtn.innerHTML = autoMode ? 
-            '<i class="fas fa-robot"></i> AUTOMATIC MODE ACTIVE' : 
-            '<i class="fas fa-hand-paper"></i> MANUAL MODE ACTIVE';
-        applyModeBtn.style.background = autoMode ? 
-            'linear-gradient(135deg, #667eea, #764ba2)' : 
-            'linear-gradient(135deg, #95a5a6, #7f8c8d)';
-    }
-}
-
-function updateAlarmDisplay(data) {
-    if (data.active === 'NONE') {
-        alarmStatus.innerHTML = `
-            <div class="alarm-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="alarm-info">
-                <h4>System Normal</h4>
-                <p>All parameters within safe limits</p>
-            </div>
-        `;
-        alarmDetails.innerHTML = '';
-        alarmStatus.style.background = '#e8f6ef';
-    } else if (data.active === 'LOW_WATER') {
-        alarmStatus.innerHTML = `
-            <div class="alarm-icon">
-                <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <div class="alarm-info">
-                <h4>ALARM: Low Water Level</h4>
-                <p>Water tank is running low!</p>
-            </div>
-        `;
-        alarmDetails.innerHTML = '⚠️ Water level is below threshold. Refill the water tank.';
-        alarmStatus.style.background = '#ffebee';
-        addLogEntry('ALARM: Low water level detected');
-    } else if (data.active === 'LOW_MOISTURE') {
-        alarmStatus.innerHTML = `
-            <div class="alarm-icon">
-                <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <div class="alarm-info">
-                <h4>ALARM: Low Soil Moisture</h4>
-                <p>Soil is too dry!</p>
-            </div>
-        `;
-        alarmDetails.innerHTML = '⚠️ Soil moisture is critically low. Check irrigation system.';
-        alarmStatus.style.background = '#ffebee';
-        addLogEntry('ALARM: Low soil moisture detected');
-    }
-}
-
-function updateConnectionStatus() {
-    if (isConnected) {
-        statusDot.classList.add('connected');
-        statusText.textContent = 'Connected to Firebase';
-        connectionInfoEl.textContent = 'Firebase: Connected';
-        connectionInfoEl.style.color = '#2ecc71';
-    } else {
-        statusDot.classList.remove('connected');
-        statusText.textContent = 'Disconnected';
-        connectionInfoEl.textContent = 'Firebase: Disconnected';
-        connectionInfoEl.style.color = '#e74c3c';
-        deviceStatusEl.textContent = 'Offline';
-        deviceStatusEl.style.color = '#e74c3c';
-    }
-}
-
-function togglePump() {
-    const newState = !pumpState;
-    database.ref('/commands/pump').set(newState)
-        .then(() => {
-            addLogEntry(`Pump ${newState ? 'turned ON' : 'turned OFF'} manually`);
-        })
-        .catch((error) => {
-            console.error('Error toggling pump:', error);
-            addLogEntry('ERROR: Failed to control pump');
-        });
-}
-
-function updateModeInFirebase(isAuto) {
-    database.ref('/commands/autoMode').set(isAuto)
-        .then(() => {
-            addLogEntry(`Mode changed to ${isAuto ? 'AUTOMATIC' : 'MANUAL'}`);
-        })
-        .catch((error) => {
-            console.error('Error updating mode:', error);
-        });
-}
-
-function applyMode() {
-    const isAuto = autoModeRadio.checked;
-    updateModeInFirebase(isAuto);
-}
-
-function testAlarm() {
-    addLogEntry('Alarm test triggered');
-    alarmStatus.innerHTML = `
-        <div class="alarm-icon">
-            <i class="fas fa-bell"></i>
-        </div>
-        <div class="alarm-info">
-            <h4>TEST ALARM</h4>
-            <p>This is a test of the alarm system</p>
-        </div>
-    `;
-    alarmDetails.innerHTML = '⚠️ Test alarm active. System is functioning normally.';
-    alarmStatus.style.background = '#fff3cd';
-    
-    // Reset after 3 seconds
-    setTimeout(() => {
-        database.ref('/alarms/active').once('value').then((snapshot) => {
-            if (snapshot.exists()) {
-                updateAlarmDisplay({active: snapshot.val()});
-            }
-        });
-    }, 3000);
-}
-
-function addLogEntry(message) {
-    const time = new Date().toLocaleTimeString();
-    const logEntry = document.createElement('div');
-    logEntry.className = 'log-entry';
-    logEntry.innerHTML = `
-        <span class="log-time">[${time}]</span>
-        <span class="log-message">${message}</span>
-    `;
-    logEntries.insertBefore(logEntry, logEntries.firstChild);
-    
-    // Keep only last 50 entries
-    while (logEntries.children.length > 50) {
-        logEntries.removeChild(logEntries.lastChild);
-    }
-}
-
-function clearLog() {
-    logEntries.innerHTML = `
-        <div class="log-entry">
-            <span class="log-time">[${new Date().toLocaleTimeString()}]</span>
-            <span class="log-message">Log cleared</span>
-        </div>
-    `;
-}
-
-// Helper functions for status messages
-function getMoistureStatus(value) {
-    if (value < 20) return 'CRITICALLY LOW';
-    if (value < 40) return 'LOW';
-    if (value < 60) return 'OPTIMAL';
-    if (value < 80) return 'HIGH';
-    return 'SATURATED';
-}
-
-function getWaterStatus(value) {
-    if (value < 20) return 'CRITICALLY LOW';
-    if (value < 50) return 'LOW';
-    if (value < 80) return 'GOOD';
-    return 'FULL';
-}
-
-function getTemperatureStatus(value) {
-    if (value < 10) return 'TOO COLD';
-    if (value < 20) return 'COOL';
-    if (value < 30) return 'OPTIMAL';
-    if (value < 35) return 'WARM';
-    return 'HOT';
-}
-
-function getHumidityStatus(value) {
-    if (value < 30) return 'DRY';
-    if (value < 60) return 'COMFORTABLE';
-    return 'HUMID';
-}
-
-// Handle page visibility change
-document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) {
-        // Page is visible again, refresh data
-        database.ref('/sensors').once('value').then(updateSensorDisplay);
-        database.ref('/system').once('value').then(updateSystemDisplay);
-    }
+    // Add nature animations CSS
+    addNatureAnimationsCSS();
 });
-
-// Add initial log entry
-addLogEntry('Web interface initialized');

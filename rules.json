@@ -1,0 +1,43 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid",
+        
+        "settings": {
+          ".read": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && auth.uid === $uid"
+        },
+        
+        "history": {
+          ".read": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && auth.uid === $uid"
+        }
+      }
+    },
+    
+    "sensors": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    
+    "system": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    
+    "commands": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    
+    "alarms": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
